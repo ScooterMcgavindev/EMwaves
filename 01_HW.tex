@@ -1,0 +1,206 @@
+% 01_HW.tex
+%------------------------------------------------------------
+%   DOCUMENT AND PACKAGES CONFIGURATIONS
+%-----------------------------------------------------------
+\documentclass[12pt]{article}
+\usepackage{etex}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{exsheets}                   % Question and solution environments
+\usepackage{amsmath, amssymb, amsthm}   % Standard AMS packages
+\usepackage{esint}                      % Integral signs
+\usepackage{gensymb}                    % Miscellaneous symbols
+\usepackage{commath}                    % Differential symbols
+\usepackage{xcolor}                     % Colours
+\usepackage{cancel}                     % Cancelling terms
+\usepackage{amsfonts}					% Math fonts
+\usepackage{nicefrac} 				   	% Slanted fractions
+\usepackage[hmargin=1.5cm,vmargin=1.5cm]{geometry}
+\usepackage[super,comma,sort&compress, square]{natbib}
+\usepackage{graphicx}					% Inset Graphics
+\usepackage{tikz}						% Drawing 
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{csvsimple}
+\usepackage{gnuplottex}
+\usepackage{todonotes}
+\usepackage{csquotes}
+\usepackage{pgfkeys}
+
+\pgfplotsset{compat=1.7}
+\usepackage[english]{babel}
+\pgfplotsset{every axis y label/.append style={xshift=1.5em}}
+
+\usepackage{hyperref} % to turn the links clickable and load this before cleveref
+\usepackage{cleveref}
+
+\crefname{table}{table}{tables}
+\Crefname{table}{Table}{Tables}
+\crefname{figure}{figure}{figures}
+\Crefname{figure}{Figure}{Figures}
+\crefname{equation}{equation}{equations}
+\Crefname{Equation}{Equation}{Equation}
+
+%---------------------------------------------------------------------------
+% 							TITLE PAGE
+%---------------------------------------------------------------------------
+
+\title{Electromagnetic Fields }
+\author{Scott Skrobel}
+\date{Feburary 2, 2019}
+
+\begin{document}
+\maketitle
+
+\section{Plane Wave Solution}
+	Consider the electric field specified in time, and space by the function
+	\( \vec{E}(z,t) = \vec{a_(x)} E_0 cos(\omega t - \beta z) \) where 
+	\( E_{0}, \omega, \) $\beta$ are constants. Using only the differential
+	form of Maxwell’s equations find the magnetic field that must coexist
+	with the given electric field in free space.
+	\vspace{5mm}
+
+	Maxwell's equations in differential form.
+	\begin{flalign}
+		& &\nabla \cdot \mathbf{D}& = \rho_{v} &&\text{\llap{(Gauss)}} \\[0.5ex]
+		& &\nabla \cdot \mathbf{B}& = 0 &&\text{\llap{(Gauss)}} \\[0.5ex]
+		& &\nabla \times \mathbf{E}& = -\frac{\partial \mathbf{B}}{\partial t} &&\text{\llap{(Faraday)}} \\[0.5ex]
+		& &\nabla \times \mathbf{B}& = \mu(\mathbf{J} + \varepsilon_0 \frac{\partial \mathbf{E}} {\partial t}) &&\text{\llap{(Ampere)}}
+	\end{flalign}
+
+	By Faraday's Law, The spatial variation of the electric field gives rise to a time-varying Magnetic 
+	field. By taking the curl of Amepere  we arrive at the result seen in \cref{eq:curl} 
+	\begin{equation}
+		\label{eq:curl}
+		\nabla\times (\nabla \times \mathbf{B}) =\nabla \times \mu\left( \mathbf{J} +\epsilon \frac{\partial \mathbf{E}} {\partial t} \right)=
+		\mu \nabla \times  \mathbf{J} +\mu \epsilon \nabla\times \frac{\partial \mathbf{E}} {\partial t}
+	\end{equation}
+	
+	Using the current Density in \cref{eq:ohm} we can substitute into \cref{eq:curl} to get \cref{eq:curlJ}
+    \begin{equation}
+		\label{eq:ohm}
+		\mathbf{J}=\sigma\mathbf{E}
+	\end{equation}
+	\noindent
+    Substitution of \cref{eq:ohm} into \cref{eq:curl} yields 
+
+	\begin{equation}
+		\label{eq:curlJ}
+		 \nabla \times(\nabla \times \mathbf{B}) =\mu \sigma\nabla \times \mathbf{E}+\mu \epsilon \nabla \times  \frac{\partial \mathbf{E}} {\partial t} 
+	\end{equation}
+	\noindent
+
+	The spatial variation of the electric field gives rise to a time-varying Magnetic field, Shown in \cref{eq:Farady},
+	allows us to perform another substitution, into \cref{eq:curlJ} which yields an expression for the RHS as is shown in 
+	\cref{eq:rhs}
+
+	\begin{equation}
+		\label{eq:Farady}
+		\nabla \times \mathbf{E} = - \frac{\partial \mathbf{B}} {\partial t}
+	\end{equation}
+
+	\begin{equation}
+		\label{eq:rhs}
+		\nabla \times(\nabla \times \mathbf{B}) = -\mu\epsilon\frac{\partial^{2} \mathbf{B}} {\partial t^{2}} - \mu\sigma\frac{\partial \mathbf{B}} {\partial t}
+	\end{equation}
+
+	The vector identity from \cref{eq:vect2} can be used to get the result in \cref{eq:lhs2}.
+
+	\begin{equation}
+		\label{eq:vect2}
+		\nabla \times \left( \nabla \times \mathbf{\psi} \right) = \nabla(\nabla \cdot \mathbf{\psi}) - \nabla^{2}\mathbf{\psi}
+    \end{equation}
+	
+	\begin{equation}
+		\label{eq:lhs}
+		\nabla \times(\nabla \times \mathbf{B} =(\nabla \times (\nabla \times \mathbf{B} ))=\nabla(\nabla\cdot\mathbf{B})-\nabla^{2}\mathbf{B}
+	\end{equation}
+		
+	\noindent
+	Where $\nabla(\nabla\cdot\mathbf{B})=0$ \cref{eq:lhs} becomes \cref{eq:rhs}
+		
+	\begin{equation}
+		\label{eq:lhs2}
+		\nabla \times(\nabla \times \mathbf{B}) =\nabla^{2}\mathbf{B}
+	\end{equation}
+		
+	\noindent
+	The last step is to simply equate \cref{eq:rhs} by  \cref{eq:lhs} as is shown in \cref{eq:penultimate}, then multiply the whole thing through by $-1$ to get the same expression as is in 
+		
+	\begin{equation}
+		\label{eq:penultimate}
+		\nabla \times(\nabla \times \mathbf{B}) = -\nabla^{2}\mathbf{B} = -\epsilon\frac{\partial^{2}\mathbf{B}} {\partial t^{2}} - \sigma\frac{\partial \mathbf{B}} {\partial t}= [-\mu\epsilon\frac{\partial^{2} \mathbf{B}} {\partial t^{2}} - \mu\sigma\frac{\partial \mathbf{B}} {\partial t}]
+	\end{equation}
+
+	\begin{equation}
+		\label{eq:identity}
+		\nabla^{2}\mathbf{B}=\epsilon\mu \frac{\partial^{2} \mathbf{B}}{\partial t^{2}}+\sigma\mu \frac{\partial \mathbf{B}}{\partial t}
+	\end{equation}
+
+	The simplest solutions to the differential equations are sinusoidal wave functions:
+	\begin{equation}
+		\label{eq:Efield}
+		\vec{E}(z,t) = \vec{a_(x)} E_{0} cos(\omega t - \beta z)
+	\end{equation}
+ 
+	\begin{equation}
+		\label{eq:Bfield}
+		\vec{B}(z,t) =  \vec{a_(y)}B_{0} cos(\omega t - \beta z)
+	\end{equation}
+
+	where \( \beta = \frac{2\pi}{\lambda} \) 
+	is the the wavenumber, 
+	\( \omega = 2\pi f \) is the angular frequency,
+	\( \lambda \) is the wavelength, f is the
+	frequency and \() \frac{\omega}{\beta} = \lambda f = c \) = speed of light \\
+
+	Taking the partial derivatives of E and B and substitute into \cref{eq:Farady}
+
+	\begin{equation}
+		\frac{\partial \mathbf{E}} {\partial t} = \beta E_{0} sin(\omega t - \beta z)	
+	\end{equation}
+
+	\begin{equation}
+		\frac{\partial \mathbf{B}} {\partial t} = \omega B_{0} sin(\omega t - \beta z)
+	\end{equation}
+
+	\begin{equation}
+		\beta E_{0} sin(\omega t - \beta z)	= \omega E_{0} sin(\omega t - \beta z)
+	\end{equation}
+
+	\begin{equation}
+		E_{0} = \frac{\omega}{\beta} B_{0} = cB_{0}		
+	\end{equation}
+
+	Giving Rise to the ratio of the electric and magnetic field amplitudes at every instant equations the speed of light.
+
+	\begin{equation}
+		\frac{E}{B} = c
+	\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
